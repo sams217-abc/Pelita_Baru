@@ -66,6 +66,77 @@
             z-index: 4; /* Text content above overlay */
         }
         /* --- End Image Slider Specific Styles --- */
+	     /* --- Custom CSS for Stats Circles (Diagram) --- */
+        .stat-circle {
+            /* Removed p-6 here as content will be absolutely positioned */
+            @apply flex flex-col items-center justify-center mx-auto; /* Kept for general structure, but `stat-content` handles actual centering */
+            width: 200px; /* Ukuran lingkaran di desktop */
+            height: 200px;
+            border-width: 4px; /* Ketebalan border */
+            border-style: solid;
+            text-align: center;
+            box-sizing: border-box; /* Sertakan padding dan border dalam total ukuran elemen */
+            border-radius: 50%; /* Memastikan bentuk lingkaran */
+            background-color: white; /* Latar belakang putih di dalam lingkaran */
+            flex-shrink: 0; /* Mencegah lingkaran menyusut di tata letak flex/grid */
+            position: relative; /* Needed for absolute positioning of .stat-content */
+            overflow: hidden; /* Ensures content inside stays within bounds */
+        }
+
+        .stat-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%; /* Take full width of parent (stat-circle) */
+            height: 100%; /* Take full height of parent (stat-circle) */
+            padding: 10px; /* Adjust padding as needed inside the content wrapper */
+            box-sizing: border-box;
+            text-align: center; /* Ensure text is centered within the wrapper */
+        }
+
+        .stat-circle .label {
+            @apply text-lg font-medium;
+        }
+
+        .stat-circle .number {
+            @apply text-6xl font-bold; /* Ukuran angka di desktop */
+            line-height: 1; /* Ensure tight line height for better centering */
+        }
+
+        .stat-circle .description {
+            @apply text-lg font-semibold uppercase;
+        }
+
+        /* Warna spesifik untuk setiap lingkaran */
+        .red-circle {
+            border-color: #DC2626; /* red-600 */
+            color: #DC2626; /* red-600 */
+        }
+        .gray-circle {
+            border-color: #6B7280; /* gray-500 */
+            color: #6B7280; /* gray-500 */
+        }
+        .dark-gray-circle {
+            border-color: #374151; /* gray-700 */
+            color: #374151; /* gray-700 */
+        }
+
+        /* Penyesuaian responsif untuk layar lebih kecil (mobile) */
+        @media (max-width: 767px) {
+            .stat-circle {
+                width: 160px; /* Lingkaran sedikit lebih kecil di mobile */
+                height: 160px;
+            }
+            .stat-circle .number {
+                font-size: 3.75rem; /* text-5xl di mobile */
+            }
+        }
+        /* --- End Custom CSS for Stats Circles --- */
     </style>
 </head>
 <body>
@@ -135,7 +206,29 @@
             </p>
         </div>
     </section>
-
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 mb-8">
+                <div class="stat-circle red-circle">
+                    <div class="stat-content">
+                        <span class="label">lebih dari</span>
+                        <div class="number">30</div>
+                        <span class="description">PARTNER HOTEL</span>
+                    </div>
+                </div>
+                <div class="stat-circle gray-circle">
+                    <div class="stat-content">
+                        <span class="label">lebih dari</span>
+                        <div class="number">5</div>
+                        <span class="description">TAHUN PENGALAMAN</span>
+                    </div>
+                </div>
+                <div class="stat-circle dark-gray-circle">
+                    <div class="stat-content">
+                        <span class="label">lebih dari</span>
+                        <div class="number">50</div>
+                        <span class="description">MACAM PRODUK</span>
+                    </div>
+                </div>
+            </div>
     <!-- Visi Misi Section -->
     <section id="visi-misi" class="py-16 md:py-20 bg-gray-50">
         <div class="container mx-auto px-4 text-center max-w-4xl">
