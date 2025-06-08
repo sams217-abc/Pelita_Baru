@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelita Baru Amenities & Hotel Supplier</title>
+    <!-- Memuat Tailwind CSS dari CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Font Inter dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-gray-50 text-gray-800; /* Default background and text colors */
+        }
+        /* Styling for mobile menu transition */
+        .nav-menu {
+            transition: all 0.3s ease-out;
+        }
+        /* By default hide menu for mobile, slide up */
+        .nav-menu.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none; /* Prevent interaction when hidden */
+        }
+        /* Show menu when active, slide to normal position */
+        .nav-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto; /* Allow interaction when visible */
+        }
+        /* For desktop view, ensure menu is always visible and without transformation */
+        @media (min-width: 768px) {
+            .nav-menu.hidden {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+
+        /* --- Image Slider Specific Styles --- */
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out; /* Smooth fade transition */
+            z-index: 1; /* Below text content */
+        }
+        .slider-image.active {
+            opacity: 1;
+            z-index: 2; /* Active image visible */
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+            z-index: 3; /* Above images, below text */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 4; /* Text content above overlay */
+        }
+        /* --- End Image Slider Specific Styles --- */
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 p-4 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo / Company Name -->
+            <a href="#" class="text-white text-2xl font-bold rounded-md px-2 py-1">Pelita Baru</a>
+
+            <!-- Menu Button (Hamburger Icon) for Mobile -->
+            <div class="md:hidden">
+                <button id="menu-button" class="text-white focus:outline-none focus:ring-2 focus:ring-white p-2 rounded-md">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Main Navigation (Hidden on Mobile, Visible on Desktop) -->
+            <div id="nav-links" class="nav-menu hidden md:flex md:items-center md:space-x-8 absolute md:relative top-full left-0 w-full md:w-auto bg-gray-800 md:bg-transparent py-4 md:py-0 transition-all duration-300 ease-out flex-col md:flex-row rounded-b-lg md:rounded-none shadow-lg md:shadow-none">
+                <a href="#welcome" class="block text-gray-300 hover:text-white px-3 py-2 md:py-0 text-lg md:text-base rounded-md">Tentang Kami</a>
+                <a href="#visi-misi" class="block text-gray-300 hover:text-white px-3 py-2 md:py-0 text-lg md:text-base rounded-md">Visi Misi</a>
+                <a href="#why-choose-us" class="block text-gray-300 hover:text-white px-3 py-2 md:py-0 text-lg md:text-base rounded-md">Mengapa Kami</a>
+                <a href="#products" class="block text-gray-300 hover:text-white px-3 py-2 md:py-0 text-lg md:text-base rounded-md">Produk</a>
+                <a href="#partners" class="block text-gray-300 hover:text-white px-3 py-2 md:py-0 text-lg md:text-base rounded-md">Partners</a>
+                <a href="#testimonials" class="block text-gray-300 hover:text-white px-3 py-2 md:py-0 text-lg md:text-base rounded-md">Testimoni</a>
+                <a href="#contact" class="block text-gray-300 hover:text-white px-3 py-2 md:py-0 text-lg md:text-base rounded-md">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section with Image Slider -->
+    <header class="relative text-white py-16 md:py-24 lg:py-32 overflow-hidden rounded-b-3xl h-96 sm:h-auto min-h-[300px]">
+        <!-- Image Slider Container -->
+        <div id="image-slider" class="absolute inset-0">
+            <div class="slider-image active" style="background-image: url('./images/slider1.jpg');"></div>
+            <div class="slider-image" style="background-image: url('./images/slider2.jpg');"></div>
+            <div class="slider-image" style="background-image: url('./images/slider3.jpg');"></div>
+            <div class="slider-image" style="background-image: url('./images/slider4.jpg');"></div>
+        </div>
+        <!-- Overlay for text readability -->
+        <div class="hero-overlay"></div>
+		<div class="container mx-auto px-4 relative z-10 text-center hero-content">
+            <!-- Pelita Baru Logo -->
+            <img src="logo pelita.png" alt="Pelita Baru Logo" class="mx-auto mb-4 w-48 md:w-64 h-auto rounded-md shadow-lg" onerror="this.onerror=null;this.src='./images/logo.png';">
+        </div>
+        <div class="container mx-auto px-4 relative z-10 text-center hero-content">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight rounded-md">
+                Pelita Baru Amenities & Hotel Supplier
+            </h1>
+            <p class="text-lg md:text-2xl mb-8 font-light max-w-3xl mx-auto rounded-md">
+                Solusi Lengkap dan Terpercaya untuk Kebutuhan Hotel Anda
+            </p>
+            <a href="#contact" class="inline-block bg-white text-red-700 hover:bg-red-100 font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Dapatkan Penawaran Sekarang!
+            </a>
+        </div>
+    </header>
+
+    <!-- Welcome to Pelita Baru Section -->
+    <section id="welcome" class="py-16 md:py-20 bg-white rounded-3xl -mt-12 mx-4 md:mx-8 lg:mx-16 shadow-lg relative z-20">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Welcome to Pelita Baru Amenities & Hotel Supplier</h2>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                Pelita Baru memberi layanan profesional untuk memenuhi kebutuhan perdagangan besar barang keperluan rumah tangga dan perdagangan eceran pelengkap pakaian, khususnya untuk kebutuhan dan keperluan Hotel, Rumah Sakit dan Perkantoran lainnya.
+            </p>
+        </div>
+    </section>
+
+    <!-- Visi Misi Section -->
+    <section id="visi-misi" class="py-16 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">Visi & Misi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Visi -->
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-red-700">Visi</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Memberi solusi dengan mengedepankan kecepatan, ketepatan dan kualitas terbaik dalam pelayanan.
+                    </p>
+                </div>
+                <!-- Misi -->
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-red-700">Misi</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Menjadi perusahaan yang memberi layanan profesional untuk memenuhi kebutuhan perdagangan besar barang keperluan rumah tangga dan perdagangan eceran pelengkap pakaian khususnya untuk kebutuhan dan keperluan Hotel, Rumah Sakit dan Perkantoran lainnya.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">Mengapa Memilih Pelita Baru?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Keunggulan 1 -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="text-red-600 text-5xl mb-4">⭐</div>
+                    <h3 class="text-xl font-semibold mb-2">Produk Berkualitas Tinggi</h3>
+                    <p class="text-gray-600">Kami hanya menyediakan produk dari produsen terkemuka, menjamin kualitas dan standar terbaik untuk hotel Anda.</p>
+                </div>
+                <!-- Keunggulan 2 -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="text-red-600 text-5xl mb-4">📦</div>
+                    <h3 class="text-xl font-semibold mb-2">Pilihan Lengkap & Beragam</h3>
+                    <p class="text-gray-600">Dari amenities kamar mandi, linen, hingga peralatan housekeeping, kami memiliki semua yang Anda butuhkan.</p>
+                </div>
+                <!-- Keunggulan 3 -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="text-red-600 text-5xl mb-4">💰</div>
+                    <h3 class="text-xl font-semibold mb-2">Harga Kompetitif</h3>
+                    <p class="text-gray-600">Dapatkan penawaran terbaik untuk produk berkualitas tanpa mengorbankan anggaran Anda.</p>
+                </div>
+                <!-- Keunggulan 4 -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="text-red-600 text-5xl mb-4">🚚</div>
+                    <h3 class="text-xl font-semibold mb-2">Pengiriman Tepat Waktu</h3>
+                    <p class="text-gray-600">Kami menghargai waktu Anda. Pesanan Anda akan sampai dengan cepat dan aman ke lokasi Anda.</p>
+                </div>
+                <!-- Keunggulan 5 -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="text-red-600 text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-semibold mb-2">Pelayanan Pelanggan Prima</h3>
+                    <p class="text-gray-600">Tim kami siap membantu Anda dengan ramah dan responsif, memastikan setiap kebutuhan Anda terpenuhi.</p>
+                </div>
+                 <!-- Keunggulan 6 (contoh tambahan) -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="text-red-600 text-5xl mb-4">🌱</div>
+                    <h3 class="text-xl font-semibold mb-2">Solusi Ramah Lingkungan</h3>
+                    <p class="text-gray-600">Tersedia pilihan produk ramah lingkungan untuk mendukung inisiatif keberlanjutan hotel Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Products Section -->
+    <section id="products" class="py-16 md:py-20 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">Produk Unggulan Kami</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product Category 1: Bathroom Amenities -->
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <img src="https://placehold.co/400x250/C70039/FFFFFF?text=Amenities+Kamar+Mandil" alt="Amenities Kamar Mandi" class="w-full h-40 object-cover rounded-md mb-4 shadow-sm" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ccc/white?text=Gambar+Tidak+Tersedia';">
+                    <h3 class="text-2xl font-semibold mb-2 text-red-700">Amenities Kamar Mandi</h3>
+                    <p class="text-gray-600">Sabun, sampo, kondisioner, lotion, sikat gigi, pasta gigi, shower cap, dan lainnya. Nyaman dan mewah untuk tamu Anda.</p>
+                </div>
+                <!-- Product Category 2: Linen & Textiles -->
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <img src="https://placehold.co/400x250/E91E63/FFFFFF?text=Linen+dan+Tekstil" alt="Linen dan Tekstil" class="w-full h-40 object-cover rounded-md mb-4 shadow-sm" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ccc/white?text=Gambar+Tidak+Tersedia';">
+                    <h3 class="text-2xl font-semibold mb-2 text-red-700">Linen & Tekstil</h3>
+                    <p class="text-gray-600">Sprei, sarung bantal, selimut, handuk, keset berkualitas tinggi yang nyaman dan tahan lama.</p>
+                </div>
+                <!-- Product Category 3: Room Supplies -->
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <img src="https://placehold.co/400x250/FF6347/FFFFFF?text=Perlengkapan+Kamar" alt="Perlengkapan Kamar" class="w-full h-40 object-cover rounded-md mb-4 shadow-sm" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ccc/white?text=Gambar+Tidak+Tersedia';">
+                    <h3 class="text-2xl font-semibold mb-2 text-red-700">Perlengkapan Kamar</h3>
+                    <p class="text-gray-600">Sandal hotel, alat tulis, tissue box, laundry bag, dan detail lainnya yang meningkatkan pengalaman tamu.</p>
+                </div>
+                <!-- Product Category 4: Housekeeping Needs -->
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <img src="https://placehold.co/400x250/CD5C5C/FFFFFF?text=Kebutuhan+Housekeeping" alt="Kebutuhan Housekeeping" class="w-full h-40 object-cover rounded-md mb-4 shadow-sm" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ccc/white?text=Gambar+Tidak+Tersedia';">
+                    <h3 class="text-2xl font-semibold mb-2 text-red-700">Kebutuhan Housekeeping</h3>
+                    <p class="text-gray-600">Troli housekeeping, cairan pembersih, peralatan kebersihan untuk efisiensi dan kebersihan optimal.</p>
+                </div>
+                <!-- Product Category 5: Food & Beverage Supplies -->
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <img src="https://placehold.co/400x250/FF4500/FFFFFF?text=F%26B+Supplies" alt="Food and Beverage Supplies" class="w-full h-40 object-cover rounded-md mb-4 shadow-sm" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ccc/white?text=Gambar+Tidak+Tersedia';">
+                    <h3 class="text-2xl font-semibold mb-2 text-red-700">Food & Beverage Supplies</h3>
+                    <p class="text-gray-600">Perlengkapan saji, piring, gelas, cutlery, hingga kebutuhan mini bar untuk pengalaman kuliner tamu.</p>
+                </div>
+                <!-- Product Category 6: Office & Administration Supplies -->
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <img src="https://placehold.co/400x250/DC143C/FFFFFF?text=Perlengkapan+Kantor" alt="Perlengkapan Kantor" class="w-full h-40 object-cover rounded-md mb-4 shadow-sm" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ccc/white?text=Gambar+Tidak+Tersedia';">
+                    <h3 class="text-2xl font-semibold mb-2 text-red-700">Perlengkapan Kantor & Administrasi</h3>
+                    <p class="text-gray-600">Kebutuhan operasional kantor hotel, seperti kertas, alat tulis, hingga perlengkapan cetak.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners and Relations Section -->
+    <section id="partners" class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">Partners & Relations</h2>
+            <p class="text-lg md:text-xl text-gray-700 mb-8">
+                Kami bangga telah bekerja sama dengan berbagai mitra terkemuka di industri.
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 items-center justify-center">
+                <!-- Placeholder Logos (9 logos) -->
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+1" alt="Partner Logo 1" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+2" alt="Partner Logo 2" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+3" alt="Partner Logo 3" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+4" alt="Partner Logo 4" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+5" alt="Partner Logo 5" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+6" alt="Partner Logo 6" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+7" alt="Partner Logo 7" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+8" alt="Partner Logo 8" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+                <div class="p-4 bg-white rounded-lg shadow-md flex items-center justify-center h-24 transform transition duration-300 hover:scale-105">
+                    <img src="https://placehold.co/120x60/F0F0F0/666666?text=Partner+9" alt="Partner Logo 9" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/120x60/ccc/white?text=Logo';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 md:py-20 bg-red-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">Apa Kata Mitra Kami?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <p class="text-gray-700 italic mb-4">"Pelita Baru selalu menjadi pilihan utama kami. Kualitas produknya konsisten, pengirimannya cepat, dan layanan pelanggannya sangat responsif. Sangat direkomendasikan!"</p>
+                    <p class="font-semibold text-red-700">- Bapak Budi, Manajer Pembelian Grand Harmony Hotel</p>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <p class="text-gray-700 italic mb-4">"Kami sangat puas dengan beragam pilihan amenities yang ditawarkan Pelita Baru. Ini membantu kami memberikan pengalaman menginap yang tak terlupakan bagi tamu."</p>
+                    <p class="font-semibold text-red-700">- Ibu Siti, General Manager Boutique Inn</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact" class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">Hubungi Kami</h2>
+            <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <!-- Contact Information -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold mb-4 text-red-700">Informasi Kontak</h3>
+                    <p class="mb-2 flex items-center">
+                        <span class="mr-2 text-red-600 text-xl">&#9742;</span>
+                        <a href="tel:+6281313512088" class="text-gray-700 hover:underline">+62 813 1351 2088</a>
+                    </p>
+                    <p class="mb-2 flex items-center">
+                        <span class="mr-2 text-red-600 text-xl">&#9993;</span>
+                        <a href="mailto:pelitabarukendal@gmail.com" class="text-gray-700 hover:underline">pelitabarukendal@gmail.com</a>
+                    </p>
+                    <p class="mb-2 flex items-start">
+                        <span class="mr-2 text-red-600 text-xl">&#128205;</span>
+                        <span class="text-gray-700">Jl. Wiratno, 005/001, Pageruyung, Kendal, Central Java, Indonesia, 51361</span>
+                    </p>
+                    <p class="mb-2 flex items-center">
+                        <span class="mr-2 text-red-600 text-xl">&#128337;</span>
+                        <span class="text-gray-700">Senin - Jumat: 09.00 - 17.00 WIB</span>
+                    </p>
+                </div>
+
+                <!-- Direct Contact Options -->
+                <div class="bg-gray-100 p-6 rounded-xl shadow-md flex flex-col justify-center items-center">
+                    <h3 class="text-2xl font-semibold mb-6 text-red-700 text-center">Atau Hubungi Kami Langsung</h3>
+                    <a href="https://wa.me/6281313512088" target="_blank" class="w-full md:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full flex items-center justify-center space-x-2 mb-4 transition duration-300 transform hover:scale-105 shadow-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.52 3.4 1.48 4.81l-1.58 5.76 5.92-1.55c1.37.76 2.92 1.18 4.09 1.18 5.46 0 9.91-4.45 9.91-9.91s-4.45-9.91-9.91-9.91zm.04 1.51c4.55 0 8.35 3.51 8.35 7.84 0 4.33-3.8 7.84-8.35 7.84-1.28 0-2.51-.31-3.61-.88l-3.75.98.98-3.64c-.6-.94-.94-2.02-.94-3.15 0-4.33 3.8-7.84 8.35-7.84zm-2.86 3.06c-.19-.46-.66-.45-.8-.18-.3.53-.44 1.18-.54 1.83-.09.61.1 1.25.43 1.8.27.46.54.85.95 1.17.41.31.86.58 1.34.72.5.15 1.05.21 1.57.17.65-.05 1.2-.28 1.63-.64.44-.36.79-.81 1.05-1.37.26-.56.32-1.16.27-1.74-.05-.59-.22-1.16-.48-1.57-.26-.41-.6-.62-.97-.73-.37-.11-.79-.06-1.18.06-.39.12-.76.36-1.13.6-.37.24-.7.4-.95.4-.25 0-.47-.07-.63-.16z"/>
+                        </svg>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="mailto:pelitabarukendal@gmail.com" class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full flex items-center justify-center space-x-2 transition duration-300 transform hover:scale-105 shadow-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.003 5.422C2.003 4.257 2.955 3.305 4.12 3.305h15.76c1.166 0 2.118.952 2.118 2.117v13.156c0 1.165-.952 2.117-2.118 2.117H4.12c-1.165 0-2.117-.952-2.117-2.117V5.422zm1.614.996L12 11.233l8.383-4.815c.348-.198.775-.24 1.186-.118.397.116.666.452.666.866v11.668c0 .118-.095.213-.213.213H4.12c-.118 0-.213-.095-.213-.213V6.657c0-.414.269-.75.666-.866.411-.122.838-.08 1.186.118zM12 9.42L3.614 4.605c-.348.198-.775.24-1.186.118-.397-.116-.666-.452-.666-.866V3.305c0-.118.095-.213.213-.213h15.76c.118 0 .213.095.213.213v.552c0 .414-.269.75-.666.866-.411.122-.838.08-1.186-.118L12 9.42z"/>
+                        </svg>
+                        <span>Email</span>
+                    </a>
+                    <p class="text-gray-600 text-sm mt-4 text-center">Klik tombol di atas untuk menghubungi kami secara langsung.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 rounded-t-3xl">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4 text-lg font-light">Pelita Baru Amenities & Hotel Supplier: Kualitas Terbaik untuk Pelayanan Hotel yang Tak Tertandingi.</p>
+            <p>&copy; 2025 Pelita Baru. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // Only apply smooth scroll if href is not just "#" and points to a specific ID
+            if (anchor.getAttribute('href') && anchor.getAttribute('href').length > 1 && anchor.getAttribute('href') !== '#') {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close menu if open (for mobile)
+                    const navLinks = document.getElementById('nav-links');
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        navLinks.classList.add('hidden');
+                    }
+                });
+            }
+        });
+
+        // Toggle mobile menu
+        document.getElementById('menu-button').addEventListener('click', function() {
+            const navLinks = document.getElementById('nav-links');
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                navLinks.classList.add('hidden');
+            } else {
+                navLinks.classList.remove('hidden');
+                navLinks.classList.add('active');
+            }
+        });
+
+        // Close mobile menu when clicking outside (optional, but good UX)
+        document.addEventListener('click', function(event) {
+            const menuButton = document.getElementById('menu-button');
+            const navLinks = document.getElementById('nav-links');
+            const isClickInsideMenu = navLinks.contains(event.target) || menuButton.contains(event.target);
+
+            // Close menu only if menu is active, not inside the menu or its button, and screen width is below 768px (md breakpoint)
+            if (!isClickInsideMenu && navLinks.classList.contains('active') && window.innerWidth < 768) {
+                navLinks.classList.remove('active');
+                navLinks.classList.add('hidden');
+            }
+        });
+
+        // --- Image Slider JavaScript Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const sliderImages = document.querySelectorAll('#image-slider .slider-image');
+            let currentIndex = 0;
+            const intervalTime = 5000; // Change image every 5 seconds (5000ms)
+
+            function showNextImage() {
+                // Remove 'active' class from current image
+                sliderImages[currentIndex].classList.remove('active');
+
+                // Increment index, reset to 0 if at the end
+                currentIndex = (currentIndex + 1) % sliderImages.length;
+
+                // Add 'active' class to next image
+                sliderImages[currentIndex].classList.add('active');
+            }
+
+            // Start the slider
+            setInterval(showNextImage, intervalTime);
+        });
+        // --- End Image Slider JavaScript Logic ---
+    </script>
+</body>
+</html>
