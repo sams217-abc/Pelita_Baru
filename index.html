@@ -85,21 +85,20 @@
             z-index: 4; /* Text content above overlay */
         }
         /* --- End Image Slider Specific Styles --- */
-	      /* --- Custom CSS for Stats Circles (Diagram) --- */
+	    /* --- Custom CSS for Stats Circles (Diagram) --- */
         .stat-circle {
-        
-            @apply flex flex-col items-center justify-center mx-auto; /* Kept for general structure, but `stat-content` handles actual centering */
-            width: 200px; /* Ukuran lingkaran di desktop */
-            height: 200px;
+            /* flex properties moved to .stat-content for better centering within fluid circle */
+            width: 100%; /* Lingkaran akan mengambil 100% lebar kolom gridnya */
+            padding-bottom: 100%; /* Mempertahankan rasio aspek 1:1 untuk bentuk lingkaran */
+            height: 0; /* Diperlukan agar padding-bottom berfungsi sebagai tinggi */
             border-width: 4px; /* Ketebalan border */
             border-style: solid;
             text-align: center;
             box-sizing: border-box; /* Sertakan padding dan border dalam total ukuran elemen */
             border-radius: 50%; /* Memastikan bentuk lingkaran */
             background-color: white; /* Latar belakang putih di dalam lingkaran */
-            flex-shrink: 0; /* Mencegah lingkaran menyusut di tata letak flex/grid */
-            position: relative; /* Needed for absolute positioning of .stat-content */
-            overflow: hidden; /* Ensures content inside stays within bounds */
+            position: relative; /* Diperlukan untuk penentuan posisi absolut dari .stat-content */
+            overflow: hidden; /* Memastikan konten di dalam tetap berada dalam batas */
         }
 
         .stat-content {
@@ -111,24 +110,24 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%; /* Take full width of parent (stat-circle) */
-            height: 100%; /* Take full height of parent (stat-circle) */
-            padding: 10px; /* Adjust padding as needed inside the content wrapper */
+            width: 100%; /* Mengambil lebar penuh dari parent (stat-circle) */
+            height: 100%; /* Mengambil tinggi penuh dari parent (stat-circle) */
+            padding: 10px; /* Sesuaikan padding sesuai kebutuhan di dalam wrapper konten */
             box-sizing: border-box;
-            text-align: center; /* Ensure text is centered within the wrapper */
+            text-align: center; /* Memastikan teks terpusat di dalam wrapper */
         }
 
         .stat-circle .label {
-            @apply text-lg font-medium;
+            @apply text-base font-medium; /* Sedikit lebih kecil untuk mobile */
         }
 
         .stat-circle .number {
-            @apply text-6xl font-bold; /* Ukuran angka di desktop */
-            line-height: 1; /* Ensure tight line height for better centering */
+            @apply text-5xl font-bold; /* Ukuran angka di mobile dan desktop */
+            line-height: 1; /* Memastikan tinggi baris yang rapat untuk pemusatan yang lebih baik */
         }
 
         .stat-circle .description {
-            @apply text-lg font-semibold uppercase;
+            @apply text-base font-semibold uppercase; /* Sedikit lebih kecil untuk mobile */
         }
 
         /* Warna spesifik untuk setiap lingkaran */
@@ -145,14 +144,16 @@
             color: #374151; /* gray-700 */
         }
 
-        /* Penyesuaian responsif untuk layar lebih kecil (mobile) */
-        @media (max-width: 767px) {
-            .stat-circle {
-                width: 160px; /* Lingkaran sedikit lebih kecil di mobile */
-                height: 160px;
+        /* Tidak perlu media query terpisah untuk ukuran lingkaran karena sudah fluid */
+        @media (min-width: 768px) {
+            .stat-circle .label {
+                @apply text-lg; /* Kembali ke ukuran desktop */
             }
             .stat-circle .number {
-                font-size: 3.75rem; /* text-5xl di mobile */
+                @apply text-6xl; /* Kembali ke ukuran desktop */
+            }
+            .stat-circle .description {
+                @apply text-lg; /* Kembali ke ukuran desktop */
             }
         }
         /* --- End Custom CSS for Stats Circles --- */
@@ -164,7 +165,11 @@
     <nav class="bg-gray-800 p-4 sticky top-0 z-50 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo / Company Name -->
-            <a href="#" class="text-white text-2xl font-bold rounded-md px-2 py-1">Pelita Baru</a>
+            <!-- Menambahkan logo kecil di samping tulisan "Pelita Baru" -->
+            <a href="#" class="text-white text-2xl font-bold rounded-md px-2 py-1 flex items-center space-x-2">
+                <img src="./Images/Logos/logo.png" alt="Pelita Baru Logo Kecil" class="h-8 w-auto rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/32x32/ccc/white?text=Logo';">
+                <span>Pelita Baru</span>
+            </a>
 
             <!-- Menu Button (Hamburger Icon) for Mobile -->
             <div class="md:hidden">
@@ -224,7 +229,9 @@
                 Pelita Baru memberi layanan profesional untuk memenuhi kebutuhan perdagangan besar barang keperluan rumah tangga dan perdagangan eceran pelengkap pakaian, khususnya untuk kebutuhan dan keperluan Hotel, Rumah Sakit dan Perkantoran lainnya.
             </p>
             <!-- CSS Diagram / Stats Circles -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 mb-8">
+            <!-- Changed grid-cols-1 md:grid-cols-3 to grid-cols-3 for always 3 columns -->
+            <!-- Changed gap-8 to gap-4 md:gap-8 for smaller gap on mobile -->
+            <div class="grid grid-cols-3 gap-4 md:gap-8 mt-12 mb-8">
                 <div class="stat-circle red-circle">
                     <div class="stat-content">
                         <span class="label">lebih dari</span>
@@ -322,6 +329,10 @@
     <section id="products" class="py-16 md:py-20 bg-gray-50">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-10">Produk Unggulan Kami</h2>
+            <!-- Tombol Unduh Katalog Produk PDF -->
+            <a href="URL_KATALOG_PRODUK_PDF_ANDA.pdf" target="_blank" class="inline-block bg-red-700 text-white hover:bg-red-800 font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 mt-4 mb-10">
+                Unduh Katalog Produk (PDF)
+            </a>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Product Category 1: Bathroom Amenities -->
                 <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
@@ -330,7 +341,7 @@
                     <p class="text-gray-600">Sabun, sampo, kondisioner, lotion, sikat gigi, pasta gigi, shower cap, dan lainnya. Nyaman dan mewah untuk tamu Anda.</p>
                 </div>
                 <!-- Product Category 2: Linen & Textiles -->
-                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                <div class="bg-white p-6 rounded-xl shadow-md transform transition duration-300 hover:scale-105 hover:hover:shadow-xl">
                     <img src="https://placehold.co/400x250/E91E63/FFFFFF?text=Linen+dan+Tekstil" alt="Linen dan Tekstil" class="w-full h-40 object-cover rounded-md mb-4 shadow-sm" onerror="this.onerror=null;this.src='https://placehold.co/400x250/ccc/white?text=Gambar+Tidak+Tersedia';">
                     <h3 class="text-2xl font-semibold mb-2 text-red-700">Linen & Tekstil</h3>
                     <p class="text-gray-600">Sprei, sarung bantal, selimut, handuk, keset berkualitas tinggi yang nyaman dan tahan lama.</p>
